@@ -1,0 +1,8 @@
+name = "native-performance-pinned"
+
+[profiles.default.env]
+MONAD_CPUSET = "14,15,30,31"
+
+[[nodes]]
+id = 1
+node_type = "validator"

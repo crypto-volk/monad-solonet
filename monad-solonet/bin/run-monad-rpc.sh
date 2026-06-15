@@ -16,4 +16,9 @@ ARGS=(
 )
 
 read -ra EXTRA_ARGS <<<"${MONAD_RPC_EXTRA_ARGS:-}"
-exec cpulimit --foreground -l 50 -- "$MONAD_RPC_CUSTOM_BIN" "${ARGS[@]}" "${EXTRA_ARGS[@]}"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec "${SCRIPT_DIR}/lib/run-with-cpu-policy.sh" \
+    "$MONAD_RPC_CUSTOM_BIN" \
+    "${ARGS[@]}" \
+    "${EXTRA_ARGS[@]}"

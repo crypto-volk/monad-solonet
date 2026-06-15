@@ -1,0 +1,8 @@
+name = "native-performance"
+
+[profiles.default.env]
+MONAD_NATIVE = "true"
+
+[[nodes]]
+id = 1
+node_type = "validator"

@@ -29,4 +29,9 @@ if [[ -n "${CHAIN_CONFIG_OVERRIDE_ENABLED:-}" ]]; then
 fi
 
 read -ra EXTRA_ARGS <<< "${MONAD_BFT_EXTRA_ARGS:-}"
-exec cpulimit --foreground -l 50 -- "$MONAD_BFT_CUSTOM_BIN" "${ARGS[@]}" "${EXTRA_ARGS[@]}"
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec "${SCRIPT_DIR}/lib/run-with-cpu-policy.sh" \
+    "$MONAD_BFT_CUSTOM_BIN" \
+    "${ARGS[@]}" \
+    "${EXTRA_ARGS[@]}"
